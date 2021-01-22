@@ -164,21 +164,9 @@
              //poster: 'https://img.estadao.com.br/resources/jpg/1/7/1570645877671.jpg'
            });
          });
-         export const checkUserAgentVideoAutoplay = async () => {
-  const video = document.querySelector('.player');
-
-  try {
-    await video.play();
-
-    video.setAttribute('autoplay', true);
-
-    console.log('video started playing successfully');
-  } catch (err) {
-    console.log(err, 'video play error');
-    // do stuff in case your video is unavailable to play/autoplay
-    // show user that video autoplay was aborted  
-  }
-}
+          $(document).ready(function() {
+              $('video').prop('muted',false).play()
+          });
       </script>
    </body>
 </html>
