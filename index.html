@@ -153,25 +153,42 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-      <script type="text/javascript" src="//cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js" async></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js" async></script>      
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js" async></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-stats/dist/clappr-stats.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-nerd-stats/dist/clappr-nerd-stats.min.js"></script>
+
       <script>
-         var playerElement = document.getElementById("player-wrapper");
-
-         var player = new Clappr.Player({
+       var player;
+       window.onload = function() {
+         Clappr.Log.setLevel(0)
+         player = new Clappr.Player({
            source: 'https://streaming.cnnbrasil.com.br/cnndigital_main.m3u8',
-           plugins: [LevelSelector, ClapprPip.PipButton, ClapprPip.PipPlugin],
+           //poster: 'http://clappr.io/poster.png',
+           parentId: "#player",
+           plugins: [ClapprPip.PipButton, ClapprPip.PipPlugin, LevelSelector, ClapprNerdStats, ClapprStats],
            autoPlay: true,
-           height: '100%',
            width: '100%',
+           height: '100%',
+           playback: { playInline: true },
            levelSelectorConfig: {
-             labelCallback: function(playbackLevel) {
-                 return playbackLevel.level.height+'p'; // 720p
-             }
+                labelCallback: function(playbackLevel) {
+                    return playbackLevel.level.height+'p'; // 720p
+                }
            },
-         });
+           clapprNerdStats: {
+              // Optional: provide multiple combination of keyboard shortcuts to show/hide the statistics.
+              // For reference, visit: https://github.com/ccampbell/mousetrap.
+              // Default: ['command+shift+s', 'ctrl+shift+s']
+              shortcut: ['command+shift+s', 'ctrl+shift+s'],
 
-         player.attachTo(playerElement);
-      </script>
+              // Optional: position of the icon to show/hide the statistics.
+              // Values: 'top-right', 'top-left', 'bottom-right', 'bottom-left', 'none'
+              // Default: 'top-right'
+              iconPosition: 'top-right'
+           }
+         });
+       };
+     </script>
    </body>
 </html>
