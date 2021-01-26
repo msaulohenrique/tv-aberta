@@ -164,15 +164,9 @@
            height: '100%',
            width: '100%',
            levelSelectorConfig: {
-                title: 'Qualidade',
-                labels: {
-                    2: 'Alta', // 500kbps
-                    1: 'Média', // 240kbps
-                    0: 'Baixa', // 120kbps
-                },
-                labelCallback: function(playbackLevel, customLabel) {
-                    return customLabel + playbackLevel.level.height+'p'; // High 720p
-                }
+             onLevelsAvailable: function(levels) {
+               return levels.reverse(); // For example, reverse levels order
+             },
            },
          });
 
