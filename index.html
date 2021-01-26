@@ -164,9 +164,9 @@
            height: '100%',
            width: '100%',
            levelSelectorConfig: {
-             onLevelsAvailable: function(levels) {
-               return levels.level.height+'p'; // For example, reverse levels order
-             },
+             labelCallback: function(playbackLevel) {
+                 return playbackLevel.level.height+'p'; // 720p
+             }
            },
          });
 
